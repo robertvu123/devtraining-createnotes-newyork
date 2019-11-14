@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application">
+    <sys_app_application action="DELETE">
+        <active>true</active>
+        <category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category>
+        <description/>
+        <device_type>browser</device_type>
+        <hint/>
+        <name>OptionSchemaTest</name>
+        <order>100</order>
+        <roles>x_snc_createnotes.optionschematest_user</roles>
+        <sys_class_name>sys_app_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 19:42:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7534a4b2db810010dbe4e4da4b96195f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>OptionSchemaTest</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sys_app_application_7534a4b2db810010dbe4e4da4b96195f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 19:42:45</sys_updated_on>
+        <title>OptionSchemaTest</title>
+        <view_name/>
+    </sys_app_application>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</application>
+        <file_path/>
+        <instance_id>b22c217adb2437004d2bac44d4961929</instance_id>
+        <instance_name>dev78935</instance_name>
+        <name>sys_app_application_7534a4b2db810010dbe4e4da4b96195f</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application"><sys_app_application action="INSERT_OR_UPDATE"><active>true</active><category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category><description/><device_type>browser</device_type><hint/><name>OptionSchemaTest</name><order>100</order><roles>x_snc_createnotes.optionschematest_user</roles><sys_class_name>sys_app_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2019-11-14 19:42:45</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7534a4b2db810010dbe4e4da4b96195f</sys_id><sys_mod_count>0</sys_mod_count><sys_name>OptionSchemaTest</sys_name><sys_overrides/><sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package><sys_policy/><sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope><sys_update_name>sys_app_application_7534a4b2db810010dbe4e4da4b96195f</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2019-11-14 19:42:45</sys_updated_on><title>OptionSchemaTest</title><view_name/></sys_app_application></record_update>]]></payload>
+        <payload_hash>-484861184</payload_hash>
+        <record_name>OptionSchemaTest</record_name>
+        <reverted_from/>
+        <source>4f0b575edbcd0010dbe4e4da4b9619ae</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 19:42:45</sys_created_on>
+        <sys_id>3534a4b2db810010dbe4e4da4b961962</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e6b7080b40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 19:42:45</sys_updated_on>
+        <type>Application Menu</type>
+        <update_guid>7d34a4b21181001022e37861620fd461</update_guid>
+        <update_guid_history>7d34a4b21181001022e37861620fd461:-484861184</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="OptionSchemaTest">074f0dbadb050010dbe4e4da4b9619de</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 22:50:59</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_application">sys_app_application</sys_db_object>
+        <sys_id>6e52a644cae14e808187851af80b1100</sys_id>
+        <sys_metadata>7534a4b2db810010dbe4e4da4b96195f</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>OptionSchemaTest</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_scope_delete display_value="">64daa03572704d49a928bf08a985d6f9</sys_scope_delete>
+        <sys_update_name>sys_app_application_7534a4b2db810010dbe4e4da4b96195f</sys_update_name>
+        <sys_update_version display_value="sys_app_application_7534a4b2db810010dbe4e4da4b96195f">3534a4b2db810010dbe4e4da4b961962</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 22:50:59</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

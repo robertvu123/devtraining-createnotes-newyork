@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $timeout) {
+	var c = this;
+
+	// modal form handling
+	var data = null;
+	var mf = this.data.modalForm;
+
+	mf.options.beforeRender = function(d) {
+		if ($scope.data.isInstance) {
+			data = d;
+			massageView(d.f);
+			massageOptions(d.f);
+			$scope.f = d.f; // need to $watch this data, put in scope
+		}
+	}
+	
+
+	mf.options.afterClose = function() {
+		$scope.closePopovers();
+		if (c.options.afterClose)
+			c.options.afterClose();
+		c.mf = null;
+	}
+
+	mf.options.afterOpen = function(modalController) {
+		if (c.options.afterOpen)
+			c.options.afterOpen.call(null, modalController);
+	};
+	
+	mf.options.modalBodyClass = "widget-options-config";
+
+	c.modalForm = mf;
+
+	function modalController(instance){
+		this.close = function(){
+			instance.close();
+		};
+
+		return this;
+	}
+
+	// schema extension
+	function massageView(form) {
+		var c = $scope.data;
+		var fields = c.field_list;
+		var s = getSchema();
+		if (!fields && !s) // no fields, no schema, don't change the view
+			return;
+
+		// cleaning up the sections based on the widget fields
+		fields = fields.split(",");
+		form._sections = removeExtraFields(form._sections, fields);
+	}
+	
+	function removeExtraFields(formSections, fieldList) {
+		var sections = JSON.parse(JSON.stringify(formSections));
+		for (var sec in formSections) {
+			sections[sec].columns[0].fields = []; // remove all the fields in that section
+			for (var f in formSections[sec].columns[0].fields) {
+				var fieldName = formSections[sec].columns[0].fields[f].name;
+				if (fieldList.indexOf(fieldName) != -1) {
+					var newField = {
+							name : fieldName,
+							type : 'field'
+					};
+					sections[sec].columns[0].fields.push(newField);
+				}
+			}
+		}
+		return sections;
+	}
+
+	function getSchema() {
+		var s = $scope.data.option_schema;
+		if (!s)
+			return null;
+
+		return JSON.parse(s);
+	}
+
+	function massageOptions(form) {
+		if (!form._fields.widget_parameters) {
+			var wp = form._fields.widget_parameters = {};
+			wp.ed = {};
+			wp.attributes = {};
+			wp.visible = false;
+			wp.displayValue = wp.value = $scope.data.wp || "";
+		}
+
+		// don't show widget_parameters field - options display individually
+		form._fields.widget_parameters.visible = false;
+		var s = getSchema();
+		if (!s)
+			return;
+
+		var o = form._fields.widget_parameters.value;
+		try {
+			o = JSON.parse(o);
+		} catch(e) {
+			o = {};
+		}
+
+		addSchema(o , s , form);
+		$timeout(setDependentValues);
+	}
+
+	function addSchema(o , s , form) {
+		var v;
+		var otherArray = [];
+		for(var i in s) {
+			// make a field
+			var si = s[i];
+			form._fields[si.name] = si;
+			si.ed = si.ed || {};
+			si.attributes = si.attributes || {};
+			si.visible = true;
+			si.displayValue = si.value = "";
+			// PRB758382: add empty choice so select can show it for nil value
+			if (si.choices && si.choices.length > 0)
+				si.choices.unshift({value: "", label: c.data.emptyChoiceMsg});
+			if (si.default_value) {
+				si.placeholder = si.default_value;
+				// PRB822604: for boolean option, show as checked if not in
+				// widget_parameters but default value is true
+				if (si.type == 'boolean')
+					si.value = si.displayValue = si.default_value;
+			}
+
+			if (o[si.name]) {
+				v = o[si.name];
+				// user could have typed
+				// zone: 'xxx'
+				// but we store as
+				// zone: {value: 'xxx'}
+				
+				if (v.hasOwnProperty('value')) {
+					si.value = v.value;
+					si.displayValue = si.currentDisplay ? si.currentDisplay : v.displayValue;
+				} else {
+					si.value = si.displayValue = v;
+				}
+			}
+			// allow for a name other than table
+			if ('field_name' == si.type || 'field_list' == si.type) {
+				si.dependentField = si.dependentField || 'table';
+			}
+			
+			// put in view
+			v = {};
+			v.name = si.name;
+			v.type = 'field';
+			form._view.push(v);
+			
+			var found = false;
+			if (si.section) {
+				for (var sect in form._sections) {
+					if (si.section == form._sections[sect].caption) {
+						form._sections[sect].columns[0].fields.push(v);
+						found = true;
+						break;
+					}
+				}
+			}
+			
+			if (!si.section || !found){
+				otherArray.push(v);  // handing the empty section case, will not be needed if we make section mandatory
+			}
+			
+			// watch each value
+			var n = "f._fields." + si.name + ".value";
+			$scope.$watch(n , watcher);
+		}
+		
+		var sec = {
+				visible: true,
+				_bootstrap_cells: 6,
+				_count: otherArray.length,
+				columns:[{fields : otherArray}],
+				caption: $scope.data.otherOptionsText
+			};
+		if (otherArray.length > 0) {
+			form._sections.push(sec); 
+		}
+		
+		// remove empty sections out of the view
+		for (var emptySect = form._sections.length -1 ; emptySect >= 0 ; emptySect--) {
+			var sectionLength = form._sections[emptySect].columns[0].fields.length;
+			if (sectionLength == 0 || (sectionLength == 1 && form._sections[emptySect].columns[0].fields[0].name == 'widget_parameters'))
+				form._sections.splice(emptySect,1);
+		}
+		$timeout(setDependentValues);
+	}
+	
+	// glideform should have done this - nneded to load
+	// the dropdowns for field_name and field_list types
+	function setDependentValues() {
+		angular.forEach(data.f._fields, function(field) {
+			if (!field.dependentField)
+				return;
+
+			var n = field.dependentField;
+			n = data.f._fields[n].value;
+			field.dependentValue = n;
+		})
+	}
+
+	// on each change, the JSON is rebuilt and put back into
+	// rectangle widget_parameters field
+	function watcher(nv, ov) {
+		if (!angular.isDefined(nv))
+			return;
+
+		var s = getSchema();
+		if (!s)
+			return;
+
+		var fields = data.f._fields;
+		var o = fields.widget_parameters.value;
+		try {
+			o = JSON.parse(o);
+		} catch(e) {
+			o = {};
+		}
+
+		// whatever is in the schema goes in the widget_parameters
+		s.forEach(function(si) {
+			var v = o[si.name] || {}
+			if (!v.hasOwnProperty('value'))
+				o[si.name] = v = {};
+
+			if (si.type == "integer")
+				v.value = parseInt(fields[si.name].value);
+			else
+				v.value = fields[si.name].value;
+			v.displayValue = fields[si.name].displayValue;
+		})
+
+		fields.widget_parameters.value = JSON.stringify(o, null, '\t');
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>clone1</id>
+        <internal>false</internal>
+        <link><![CDATA[function(scope) {
+	scope.closePopovers = function() {
+		$('.popover').popover('hide');
+	}
+}]]></link>
+        <name>Clone1</name>
+        <option_schema>[{"name":"table","section":"Data","label":"Table to configure","type":"string"},{"name":"sys_id","section":"Data","label":"Record to configure","type":"string"},{"name":"afterClose","section":"Behavior","label":"After modal close Callback","type":"string"},{"name":"afterOpen","section":"Behavior","label":"After modal open Callback called with modal controller","type":"string"},{"name":"hideRelatedLists","section":"Behavior","label":"Hide related lists from the embedded form","type":"boolean"}]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[// populate the 'data' object
+// e.g., data.table = $sp.getValue('table');
+(function(){
+	data.otherOptionsText = gs.getMessage("Other Options");
+	data.emptyChoiceMsg = gs.getMessage("-- None --");
+	var sys_id = options.sys_id || input.sys_id;
+	var table = options.table || input.table;
+	var hideRelatedLists = options.hideRelatedLists || input.hideRelatedLists || false;
+	var gr = new GlideRecord(table);
+	gr.get(sys_id);
+  
+	data.isInstance = gr.instanceOf("sp_instance");
+	data.field_list = gr.getDisplayValue('sp_widget.field_list');
+	data.option_schema = gr.getDisplayValue('sp_widget.option_schema');
+	data.wp = gr.getValue("widget_parameters");
+	var j;
+	try {
+		var optionsJO;
+		try {
+			// parse options from the sp_instance record being edited
+			optionsJO = JSON.parse(data.wp);
+		} catch(e) {
+		} finally {
+			if (optionsJO == null)
+				optionsJO = {};
+		}
+		j = JSON.parse(data.option_schema);
+		j.forEach(function(f) {
+			if (f.type == "reference" || f.type == "glide_list") {
+				var refGR = new GlideRecord(f.ed.reference);
+				f.ed.searchField = refGR.getDisplayName();
+				if (optionsJO[f.name] && optionsJO[f.name].value) {
+					// look up current display values for referenced records
+					refGR.addQuery("sys_id", optionsJO[f.name].value.split(","));
+					refGR.query();
+					f.currentDisplay = "";
+					var displayArr = [];
+					while (refGR.next()) {
+						f.currentDisplay = refGR.getDisplayValue();
+						displayArr.push(refGR.getDisplayValue());
+					}
+					if (f.type == "glide_list")
+						f.currentDisplay = displayArr; // glide_list takes Array of display values
+				}
+			}
+			if (f.hint)
+				f.hint = gs.getMessage(f.hint);
+      if (f.label)
+        f.label = gs.getMessage(f.label);
+		})
+	} catch(e1) {
+		j = [];
+	}
+	data.option_schema = JSON.stringify(j);
+	data.modalForm = $sp.getWidget('widget-modal', {embeddedWidgetId: 'widget-form', embeddedWidgetOptions: { table: table, sys_id: sys_id, hideRelatedLists: hideRelatedLists, view: 'sp_instance_config'}});
+
+	// if widget_parameters isn't in field_list, add it so it saves properly
+	var schemaLength = 0;
+	if (!GlideStringUtil.nil(data.option_schema)) {
+		try {
+			schemaLength = JSON.parse(data.option_schema).length
+		} catch(e) {}
+	}
+	if (GlideStringUtil.nil(data.field_list) && schemaLength > 0)
+		data.field_list = "widget_parameters";
+	if (!GlideStringUtil.nil(data.field_list) && data.field_list.indexOf("widget_parameters") == -1)
+		data.field_list += ",widget_parameters";
+})()]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 00:24:10</sys_created_on>
+        <sys_id>120bd86edbc14010dbe4e4da4b96196a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clone1</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_120bd86edbc14010dbe4e4da4b96196a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 00:24:10</sys_updated_on>
+        <template><![CDATA[<sp-widget widget="c.modalForm" ng-if="c.modalForm"></sp-widget>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</application>
+        <file_path/>
+        <instance_id>b22c217adb2437004d2bac44d4961929</instance_id>
+        <instance_name>dev78935</instance_name>
+        <name>sp_widget_120bd86edbc14010dbe4e4da4b96196a</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope, $timeout) {
+	var c = this;
+
+	// modal form handling
+	var data = null;
+	var mf = this.data.modalForm;
+
+	mf.options.beforeRender = function(d) {
+		if ($scope.data.isInstance) {
+			data = d;
+			massageView(d.f);
+			massageOptions(d.f);
+			$scope.f = d.f; // need to $watch this data, put in scope
+		}
+	}
+	
+
+	mf.options.afterClose = function() {
+		$scope.closePopovers();
+		if (c.options.afterClose)
+			c.options.afterClose();
+		c.mf = null;
+	}
+
+	mf.options.afterOpen = function(modalController) {
+		if (c.options.afterOpen)
+			c.options.afterOpen.call(null, modalController);
+	};
+	
+	mf.options.modalBodyClass = "widget-options-config";
+
+	c.modalForm = mf;
+
+	function modalController(instance){
+		this.close = function(){
+			instance.close();
+		};
+
+		return this;
+	}
+
+	// schema extension
+	function massageView(form) {
+		var c = $scope.data;
+		var fields = c.field_list;
+		var s = getSchema();
+		if (!fields &amp;&amp; !s) // no fields, no schema, don't change the view
+			return;
+
+		// cleaning up the sections based on the widget fields
+		fields = fields.split(",");
+		form._sections = removeExtraFields(form._sections, fields);
+	}
+	
+	function removeExtraFields(formSections, fieldList) {
+		var sections = JSON.parse(JSON.stringify(formSections));
+		for (var sec in formSections) {
+			sections[sec].columns[0].fields = []; // remove all the fields in that section
+			for (var f in formSections[sec].columns[0].fields) {
+				var fieldName = formSections[sec].columns[0].fields[f].name;
+				if (fieldList.indexOf(fieldName) != -1) {
+					var newField = {
+							name : fieldName,
+							type : 'field'
+					};
+					sections[sec].columns[0].fields.push(newField);
+				}
+			}
+		}
+		return sections;
+	}
+
+	function getSchema() {
+		var s = $scope.data.option_schema;
+		if (!s)
+			return null;
+
+		return JSON.parse(s);
+	}
+
+	function massageOptions(form) {
+		if (!form._fields.widget_parameters) {
+			var wp = form._fields.widget_parameters = {};
+			wp.ed = {};
+			wp.attributes = {};
+			wp.visible = false;
+			wp.displayValue = wp.value = $scope.data.wp || "";
+		}
+
+		// don't show widget_parameters field - options display individually
+		form._fields.widget_parameters.visible = false;
+		var s = getSchema();
+		if (!s)
+			return;
+
+		var o = form._fields.widget_parameters.value;
+		try {
+			o = JSON.parse(o);
+		} catch(e) {
+			o = {};
+		}
+
+		addSchema(o , s , form);
+		$timeout(setDependentValues);
+	}
+
+	function addSchema(o , s , form) {
+		var v;
+		var otherArray = [];
+		for(var i in s) {
+			// make a field
+			var si = s[i];
+			form._fields[si.name] = si;
+			si.ed = si.ed || {};
+			si.attributes = si.attributes || {};
+			si.visible = true;
+			si.displayValue = si.value = "";
+			// PRB758382: add empty choice so select can show it for nil value
+			if (si.choices &amp;&amp; si.choices.length &gt; 0)
+				si.choices.unshift({value: "", label: c.data.emptyChoiceMsg});
+			if (si.default_value) {
+				si.placeholder = si.default_value;
+				// PRB822604: for boolean option, show as checked if not in
+				// widget_parameters but default value is true
+				if (si.type == 'boolean')
+					si.value = si.displayValue = si.default_value;
+			}
+
+			if (o[si.name]) {
+				v = o[si.name];
+				// user could have typed
+				// zone: 'xxx'
+				// but we store as
+				// zone: {value: 'xxx'}
+				
+				if (v.hasOwnProperty('value')) {
+					si.value = v.value;
+					si.displayValue = si.currentDisplay ? si.currentDisplay : v.displayValue;
+				} else {
+					si.value = si.displayValue = v;
+				}
+			}
+			// allow for a name other than table
+			if ('field_name' == si.type || 'field_list' == si.type) {
+				si.dependentField = si.dependentField || 'table';
+			}
+			
+			// put in view
+			v = {};
+			v.name = si.name;
+			v.type = 'field';
+			form._view.push(v);
+			
+			var found = false;
+			if (si.section) {
+				for (var sect in form._sections) {
+					if (si.section == form._sections[sect].caption) {
+						form._sections[sect].columns[0].fields.push(v);
+						found = true;
+						break;
+					}
+				}
+			}
+			
+			if (!si.section || !found){
+				otherArray.push(v);  // handing the empty section case, will not be needed if we make section mandatory
+			}
+			
+			// watch each value
+			var n = "f._fields." + si.name + ".value";
+			$scope.$watch(n , watcher);
+		}
+		
+		var sec = {
+				visible: true,
+				_bootstrap_cells: 6,
+				_count: otherArray.length,
+				columns:[{fields : otherArray}],
+				caption: $scope.data.otherOptionsText
+			};
+		if (otherArray.length &gt; 0) {
+			form._sections.push(sec); 
+		}
+		
+		// remove empty sections out of the view
+		for (var emptySect = form._sections.length -1 ; emptySect &gt;= 0 ; emptySect--) {
+			var sectionLength = form._sections[emptySect].columns[0].fields.length;
+			if (sectionLength == 0 || (sectionLength == 1 &amp;&amp; form._sections[emptySect].columns[0].fields[0].name == 'widget_parameters'))
+				form._sections.splice(emptySect,1);
+		}
+		$timeout(setDependentValues);
+	}
+	
+	// glideform should have done this - nneded to load
+	// the dropdowns for field_name and field_list types
+	function setDependentValues() {
+		angular.forEach(data.f._fields, function(field) {
+			if (!field.dependentField)
+				return;
+
+			var n = field.dependentField;
+			n = data.f._fields[n].value;
+			field.dependentValue = n;
+		})
+	}
+
+	// on each change, the JSON is rebuilt and put back into
+	// rectangle widget_parameters field
+	function watcher(nv, ov) {
+		if (!angular.isDefined(nv))
+			return;
+
+		var s = getSchema();
+		if (!s)
+			return;
+
+		var fields = data.f._fields;
+		var o = fields.widget_parameters.value;
+		try {
+			o = JSON.parse(o);
+		} catch(e) {
+			o = {};
+		}
+
+		// whatever is in the schema goes in the widget_parameters
+		s.forEach(function(si) {
+			var v = o[si.name] || {}
+			if (!v.hasOwnProperty('value'))
+				o[si.name] = v = {};
+
+			if (si.type == "integer")
+				v.value = parseInt(fields[si.name].value);
+			else
+				v.value = fields[si.name].value;
+			v.displayValue = fields[si.name].displayValue;
+		})
+
+		fields.widget_parameters.value = JSON.stringify(o, null, '\t');
+	}
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;clone1&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function(scope) {
+	scope.closePopovers = function() {
+		$('.popover').popover('hide');
+	}
+}]]&gt;&lt;/link&gt;&lt;name&gt;Clone1&lt;/name&gt;&lt;option_schema&gt;[{"name":"table","section":"Data","label":"Table to configure","type":"string"},{"name":"sys_id","section":"Data","label":"Record to configure","type":"string"},{"name":"afterClose","section":"Behavior","label":"After modal close Callback","type":"string"},{"name":"afterOpen","section":"Behavior","label":"After modal open Callback called with modal controller","type":"string"},{"name":"hideRelatedLists","section":"Behavior","label":"Hide related lists from the embedded form","type":"boolean"}]&lt;/option_schema&gt;&lt;public&gt;true&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[// populate the 'data' object
+// e.g., data.table = $sp.getValue('table');
+(function(){
+	data.otherOptionsText = gs.getMessage("Other Options");
+	data.emptyChoiceMsg = gs.getMessage("-- None --");
+	var sys_id = options.sys_id || input.sys_id;
+	var table = options.table || input.table;
+	var hideRelatedLists = options.hideRelatedLists || input.hideRelatedLists || false;
+	var gr = new GlideRecord(table);
+	gr.get(sys_id);
+  
+	data.isInstance = gr.instanceOf("sp_instance");
+	data.field_list = gr.getDisplayValue('sp_widget.field_list');
+	data.option_schema = gr.getDisplayValue('sp_widget.option_schema');
+	data.wp = gr.getValue("widget_parameters");
+	var j;
+	try {
+		var optionsJO;
+		try {
+			// parse options from the sp_instance record being edited
+			optionsJO = JSON.parse(data.wp);
+		} catch(e) {
+		} finally {
+			if (optionsJO == null)
+				optionsJO = {};
+		}
+		j = JSON.parse(data.option_schema);
+		j.forEach(function(f) {
+			if (f.type == "reference" || f.type == "glide_list") {
+				var refGR = new GlideRecord(f.ed.reference);
+				f.ed.searchField = refGR.getDisplayName();
+				if (optionsJO[f.name] &amp;&amp; optionsJO[f.name].value) {
+					// look up current display values for referenced records
+					refGR.addQuery("sys_id", optionsJO[f.name].value.split(","));
+					refGR.query();
+					f.currentDisplay = "";
+					var displayArr = [];
+					while (refGR.next()) {
+						f.currentDisplay = refGR.getDisplayValue();
+						displayArr.push(refGR.getDisplayValue());
+					}
+					if (f.type == "glide_list")
+						f.currentDisplay = displayArr; // glide_list takes Array of display values
+				}
+			}
+			if (f.hint)
+				f.hint = gs.getMessage(f.hint);
+      if (f.label)
+        f.label = gs.getMessage(f.label);
+		})
+	} catch(e1) {
+		j = [];
+	}
+	data.option_schema = JSON.stringify(j);
+	data.modalForm = $sp.getWidget('widget-modal', {embeddedWidgetId: 'widget-form', embeddedWidgetOptions: { table: table, sys_id: sys_id, hideRelatedLists: hideRelatedLists, view: 'sp_instance_config'}});
+
+	// if widget_parameters isn't in field_list, add it so it saves properly
+	var schemaLength = 0;
+	if (!GlideStringUtil.nil(data.option_schema)) {
+		try {
+			schemaLength = JSON.parse(data.option_schema).length
+		} catch(e) {}
+	}
+	if (GlideStringUtil.nil(data.field_list) &amp;&amp; schemaLength &gt; 0)
+		data.field_list = "widget_parameters";
+	if (!GlideStringUtil.nil(data.field_list) &amp;&amp; data.field_list.indexOf("widget_parameters") == -1)
+		data.field_list += ",widget_parameters";
+})()]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-11-14 00:24:10&lt;/sys_created_on&gt;&lt;sys_id&gt;120bd86edbc14010dbe4e4da4b96196a&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Clone1&lt;/sys_name&gt;&lt;sys_package display_value="CreateNotes" source="x_snc_createnotes"&gt;df5fd9a5090232007f44e1046c8ff69f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CreateNotes"&gt;df5fd9a5090232007f44e1046c8ff69f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_120bd86edbc14010dbe4e4da4b96196a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-11-14 00:24:10&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;sp-widget widget="c.modalForm" ng-if="c.modalForm"&gt;&lt;/sp-widget&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-97134506</payload_hash>
+        <record_name>Clone1</record_name>
+        <reverted_from/>
+        <source>4f0b575edbcd0010dbe4e4da4b9619ae</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 00:24:10</sys_created_on>
+        <sys_id>da0bd86edbc14010dbe4e4da4b96196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e674bc9d20000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 00:24:10</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>160bd86e0fc140107c10c2919d77c56b</update_guid>
+        <update_guid_history>160bd86e0fc140107c10c2919d77c56b:-97134506</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Clone1">24f64476db010010dbe4e4da4b96192b</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 17:34:52</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>07d022e8a413458089841e38cad38e90</sys_id>
+        <sys_metadata>120bd86edbc14010dbe4e4da4b96196a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clone1</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_scope_delete display_value="">64daa03572704d49a928bf08a985d6f9</sys_scope_delete>
+        <sys_update_name>sp_widget_120bd86edbc14010dbe4e4da4b96196a</sys_update_name>
+        <sys_update_version display_value="sp_widget_120bd86edbc14010dbe4e4da4b96196a">da0bd86edbc14010dbe4e4da4b96196b</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 17:34:52</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

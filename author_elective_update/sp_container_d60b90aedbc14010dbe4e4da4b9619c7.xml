@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="DELETE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Clone1 - Test Page - Container 1</name>
+        <order>1</order>
+        <sp_page display_value="clone1">920bd86edbc14010dbe4e4da4b96196f</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 00:24:10</sys_created_on>
+        <sys_id>d60b90aedbc14010dbe4e4da4b9619c7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clone1 - Test Page - Container 1</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_container_d60b90aedbc14010dbe4e4da4b9619c7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 00:24:10</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</application>
+        <file_path/>
+        <instance_id>b22c217adb2437004d2bac44d4961929</instance_id>
+        <instance_name>dev78935</instance_name>
+        <name>sp_container_d60b90aedbc14010dbe4e4da4b9619c7</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container"><sp_container action="INSERT_OR_UPDATE"><background_color/><background_image/><background_style>default</background_style><bootstrap_alt>false</bootstrap_alt><class_name/><container_class_name/><name>Clone1 - Test Page - Container 1</name><order>1</order><sp_page display_value="clone1">920bd86edbc14010dbe4e4da4b96196f</sp_page><subheader>false</subheader><sys_class_name>sp_container</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2019-11-14 00:24:10</sys_created_on><sys_id>d60b90aedbc14010dbe4e4da4b9619c7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Clone1 - Test Page - Container 1</sys_name><sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package><sys_policy/><sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope><sys_update_name>sp_container_d60b90aedbc14010dbe4e4da4b9619c7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2019-11-14 00:24:10</sys_updated_on><title/><width>container</width></sp_container></record_update>]]></payload>
+        <payload_hash>1607445068</payload_hash>
+        <record_name>Clone1 - Test Page - Container 1</record_name>
+        <reverted_from/>
+        <source>4f0b575edbcd0010dbe4e4da4b9619ae</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 00:24:10</sys_created_on>
+        <sys_id>de0b90aedbc14010dbe4e4da4b9619c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e674bcaeb0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 00:24:10</sys_updated_on>
+        <type>Container</type>
+        <update_guid>1a0b90aea0c14010e01c0a4901da36c8</update_guid>
+        <update_guid_history>1a0b90aea0c14010e01c0a4901da36c8:1607445068</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Clone1 - Test Page - Container 1">58678c76db010010dbe4e4da4b9619d5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 17:36:46</sys_created_on>
+        <sys_db_object display_value="" name="sp_container">sp_container</sys_db_object>
+        <sys_id>661d06fbffa24b88b8abacbb2fb82840</sys_id>
+        <sys_metadata>d60b90aedbc14010dbe4e4da4b9619c7</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clone1 - Test Page - Container 1</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_scope_delete display_value="">64daa03572704d49a928bf08a985d6f9</sys_scope_delete>
+        <sys_update_name>sp_container_d60b90aedbc14010dbe4e4da4b9619c7</sys_update_name>
+        <sys_update_version display_value="sp_container_d60b90aedbc14010dbe4e4da4b9619c7">de0b90aedbc14010dbe4e4da4b9619c8</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 17:36:46</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

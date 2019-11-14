@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	c.test1 = typeof c.options.custom;
+	c.test2 = c.options.custom;
+	console.log(c.options.custom);
+	console.log(c.options);
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>span {
+  width: 75px;
+  display: inline-block;
+}</css>
+        <data_table>x_snc_createnotes_optionschematest</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list>table,custom</field_list>
+        <has_preview>true</has_preview>
+        <id>optionschematest</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>OptionSchemaTest</name>
+        <option_schema>[{"name":"string_option","section":"other","default_value":"xyz","label":"String Option","type":"string"},{"name":"boolean_option","section":"other","default_value":"true","label":"Boolean Option","type":"boolean"},{"name":"integer_option","section":"other","default_value":"1","label":"Integer Option","type":"integer"},{"displayValue":"Note","name":"reference_option","section":"other","default_value":"57eb80eedb814010dbe4e4da4b96198f","label":"Reference Option","type":"reference","value":"x_snc_createnotes_note","ed":{"reference":"x_snc_createnotes_note"}},{"name":"choice_option","section":"other","default_value":"1","label":"Choice Option","type":"choice","choices":[{"label":"1","value":"1"},{"label":"2","value":"2"},{"label":"3","value":"3"}]},{"name":"name_option","section":"other","default_value":"title","label":"Name Option","type":"field_name"},{"name":"list_option","section":"other","default_value":"sys_id,title","label":"List Option","type":"field_list"},{"displayValue":"Note","name":"glide_option","display_value_list":[],"section":"other","default_value":"1e6cd4eedbc14010dbe4e4da4b961998,376c98eedbc14010dbe4e4da4b961981","label":"Glide Option","type":"glide_list","value":"x_snc_createnotes_note","ed":{"reference":"x_snc_createnotes_note"}}]</option_schema>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	options.boolean_option = options.boolean_option == 'true';
+	options.integer_option = Number(options.integer_option);
+	options.custom = Date.parse(options.custom);
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 00:21:47</sys_created_on>
+        <sys_id>137adc6adbc14010dbe4e4da4b961949</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>OptionSchemaTest</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_137adc6adbc14010dbe4e4da4b961949</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 20:33:41</sys_updated_on>
+        <template><![CDATA[<div>
+<!-- your widget template -->
+  <div>{{text1}}</div>
+  <span>String:</span><input ng-model="options.string_option"/>
+  <br>
+  <span>Boolean:</span><input type="checkbox" ng-model="options.boolean_option"/>
+  <br>
+  <span>Integer:</span><input type="number" ng-model="options.integer_option"/>
+	<br>
+  <span>Reference:</span><input ng-model="options.reference_option"/>
+  <br>
+  <span>Choice:</span><input ng-model="options.choice_option"/>
+  <br>
+  <span>Field Name:</span><input ng-model="options.name_option"/>
+  <br>
+  <span>Field List:</span><input ng-model="options.list_option"/>
+  <br>
+  <span>Glide List:</span><input ng-model="options.glide_option"/>
+  <br>
+  <span>Custom:</span><input ng-model="options.custom"/>
+  <br>
+  {{c.test1}}
+  <br>
+  {{c.test2}}
+</div>]]></template>
+    </sp_widget>
+</record_update>

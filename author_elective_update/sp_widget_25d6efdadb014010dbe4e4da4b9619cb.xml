@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	c.test1 = typeof c.options.choice_option;
+	c.test2 = c.options.choice_option;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>span {
+  width: 75px;
+  display: inline-block;
+}</css>
+        <data_table>x_snc_createnotes_note</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>testoptions</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TestOptions</name>
+        <option_schema>[{"name":"string_option","section":"other","default_value":"abc","label":"String Option","type":"string"},{"name":"boolean_option","section":"other","default_value":"true","label":"Boolean Option","type":"boolean"},{"name":"integer_option","section":"other","default_value":"1","label":"Integer Option","type":"integer"},{"displayValue":"Note","name":"reference_option","section":"other","default_value":"57eb80eedb814010dbe4e4da4b96198f","label":"Reference Option","type":"reference","value":"x_snc_createnotes_note","ed":{"reference":"x_snc_createnotes_note"}},{"name":"choice_option","section":"other","default_value":"1","label":"Choice Option","type":"choice","choices":[{"label":"1","value":"1"},{"label":"2","value":"2"}]},{"name":"field_name_option","section":"other","label":"Field Name Option","type":"field_name"}]</option_schema>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	options.boolean_option = options.boolean_option == 'true';
+	options.integer_option = Number(options.integer_option);
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-13 20:36:06</sys_created_on>
+        <sys_id>25d6efdadb014010dbe4e4da4b9619cb</sys_id>
+        <sys_mod_count>98</sys_mod_count>
+        <sys_name>TestOptions</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_25d6efdadb014010dbe4e4da4b9619cb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 00:20:13</sys_updated_on>
+        <template><![CDATA[<div>
+<!-- your widget template -->
+  <div>{{text1}}</div>
+  <span>String:</span><input ng-model="options.string_option"/>
+  <br>
+  <span>Boolean:</span><input type="checkbox" ng-model="options.boolean_option"/>
+  <br>
+  <span>Integer:</span><input type="number" ng-model="options.integer_option"/>
+	<br>
+  <span>Reference:</span><input ng-model="options.reference_option"/>
+  <br>
+  <span>Choice</span><input ng-model="options.choice_option"/>
+  <br>
+  {{c.test1}}
+  {{c.test2}}
+  {{options}}
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</application>
+        <file_path/>
+        <instance_id>b22c217adb2437004d2bac44d4961929</instance_id>
+        <instance_name>dev78935</instance_name>
+        <name>sp_widget_25d6efdadb014010dbe4e4da4b9619cb</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	c.test1 = typeof c.options.choice_option;
+	c.test2 = c.options.choice_option;
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;span {
+  width: 75px;
+  display: inline-block;
+}&lt;/css&gt;&lt;data_table&gt;x_snc_createnotes_note&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;testoptions&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;TestOptions&lt;/name&gt;&lt;option_schema&gt;[{"name":"string_option","section":"other","default_value":"abc","label":"String Option","type":"string"},{"name":"boolean_option","section":"other","default_value":"true","label":"Boolean Option","type":"boolean"},{"name":"integer_option","section":"other","default_value":"1","label":"Integer Option","type":"integer"},{"displayValue":"Note","name":"reference_option","section":"other","default_value":"57eb80eedb814010dbe4e4da4b96198f","label":"Reference Option","type":"reference","value":"x_snc_createnotes_note","ed":{"reference":"x_snc_createnotes_note"}},{"name":"choice_option","section":"other","default_value":"1","label":"Choice Option","type":"choice","choices":[{"label":"1","value":"1"},{"label":"2","value":"2"}]},{"name":"field_name_option","section":"other","label":"Field Name Option","type":"field_name"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	options.boolean_option = options.boolean_option == 'true';
+	options.integer_option = Number(options.integer_option);
+	
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-11-13 20:36:06&lt;/sys_created_on&gt;&lt;sys_id&gt;25d6efdadb014010dbe4e4da4b9619cb&lt;/sys_id&gt;&lt;sys_mod_count&gt;98&lt;/sys_mod_count&gt;&lt;sys_name&gt;TestOptions&lt;/sys_name&gt;&lt;sys_package display_value="CreateNotes" source="x_snc_createnotes"&gt;df5fd9a5090232007f44e1046c8ff69f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CreateNotes"&gt;df5fd9a5090232007f44e1046c8ff69f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_25d6efdadb014010dbe4e4da4b9619cb&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-11-14 00:20:13&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div&gt;
+&lt;!-- your widget template --&gt;
+  &lt;div&gt;{{text1}}&lt;/div&gt;
+  &lt;span&gt;String:&lt;/span&gt;&lt;input ng-model="options.string_option"/&gt;
+  &lt;br&gt;
+  &lt;span&gt;Boolean:&lt;/span&gt;&lt;input type="checkbox" ng-model="options.boolean_option"/&gt;
+  &lt;br&gt;
+  &lt;span&gt;Integer:&lt;/span&gt;&lt;input type="number" ng-model="options.integer_option"/&gt;
+	&lt;br&gt;
+  &lt;span&gt;Reference:&lt;/span&gt;&lt;input ng-model="options.reference_option"/&gt;
+  &lt;br&gt;
+  &lt;span&gt;Choice&lt;/span&gt;&lt;input ng-model="options.choice_option"/&gt;
+  &lt;br&gt;
+  {{c.test1}}
+  {{c.test2}}
+  {{options}}
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-129229864</payload_hash>
+        <record_name>TestOptions</record_name>
+        <reverted_from/>
+        <source>4f0b575edbcd0010dbe4e4da4b9619ae</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 00:20:13</sys_created_on>
+        <sys_id>e42ad8aadbc14010dbe4e4da4b961918</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e67482d9f0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 00:20:13</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>602ad8aac6c14010457ebf4ddda1f718</update_guid>
+        <update_guid_history>602ad8aac6c14010457ebf4ddda1f718:-129229864,401ad06e1cc14010b9e02ff77571320a:1570732724,4f3994ea47c14010b2d5b6a92554e48e:-1924684887,27f6186a3dc1401029736c32da9c86b7:-1736101634,bbe6186a1ac14010b1263d6a36ab8e7d:-123451408,43e65ce650c1401089db561053df8bb3:-1644297256,afb6546af5c140105386e60c06a86a94:-313585403,0d869ce61dc140108c977bdabcf06e65:-1058629693,aa265c2a5fc140101c96fb194a298855:-467036777,53169ce6bdc14010ae573f2ad8667586:1633401015,7065502a23c140101c45d40dcc30a953:1792002055,6ef4106666c1401071cbd8ceb86a285e:1377508125,a27490a65fc1401067bbee7e0aa65b3e:227760529,d00ec06235c1401023966154e257fb87:806608060,5bddc4ee9a8140102c76fe6768c10348:-1444734787,0ddd8022f5c1401077bb7be24160588e:1351037322,b6cd8c22dbc140108bfa9378cd2bce12:1061664890,72bd4c224cc140101cb44447ec46c284:168137253,97ad8c22e5c14010ab3ed0443caa880a:1799352686,88ad8ceef981401014380f7380437c53:-2008025547,ffdc80228fc140105e7a5ee0551fe12d:-1189503460,2ebc8cee2481401071a1394b2529013f:604145596,fc5c48eec4814010e36a7187dcb9b9e9:630683826,9d4c48ee028140104cd3c409615b4f0c:602406514,a2bb00ee77814010365dbe9576675667:-465996977,9f1a486e968140104238db696fd9c2b3:-238891384,e11a086e42814010caedee3a8cd178fa:-2129868979,2bd9046ea8814010d245754da622ec60:100880395,10c98c2eb98140106a56096e5d2eaab2:-412604616,65a9806ec2814010038ab49010c6db6c:-338013237,ef59802e0d81401014fe5ea69b922503:-387743841,8e390c2e7c814010b5408c96a0612c0e:-1322531909,20f8082e568140109d369d6f5a63f421:-1224536394,09e888aa97814010c3718a3538313d21:2145510735,b38888aa8c814010bf51c251d0bc422c:1543795488,6988402ee9814010e067a8b3c123a5e6:791677927,0b0848aa0c81401072073b92bc4a3ff7:-743198536,3135002a42814010ddb65606c8006962:2011437525,4835006a8081401066ea4b3db9278670:1035487952,ec158ce6438140104905a562a1384ba4:-1710075956,2fa308e6b2814010b60878bdd1f8fd51:268737945,e8934ca6c08140102e07dcc25b2dc266:-1945592872,0333c8a60081401030d091c58e2a1165:-1339516520,3e03cca624814010af006f5f091da929:-1823798872,01d248a63f814010dd81b2156189ca77:757164606,c8b208a633814010c277bc28310db67c:1689504752,caa20c665a814010af96e53951abd9a4:-1520876341,139208a618814010e5b2b8e0073bb075:-749055417,9d7284a669814010b1c5668ade37f206:-1395140184,e23200a6008140103b3343c71a6e2a06:-1467089409,9c12cc665d814010ab887242098084f3:273933505,0af18c669f8140104d15e4c1cc6cd099:1913327005,97a18866998140105ea8afb064af2552:1106922306,25a1c4264d814010f692c97d58f2d48f:1394767122,40a1806654814010a3cf125798040d14:1113476322,a631c06653814010448d22de781a57da:-50351365,a740002641814010e8ba3336386d6ee7:-1337099477,ed4048e2058140104a382ae4389c727d:-2093267711,7020c4e2d0814010bbfcf03abdbf21bf:-627660136,0b1004e2ee8140105c99236bcf259be5:1268761062,5effff9281814010923118d0c687df1e:-660495545,a75ff7d28f8140103ebe45b2b9b055b9:39418233,84cebf9253814010fa87790b2f66f5fb:-1936528703,ac1e77921f8140104ea351819860b314:1525814557,bcfdf392c2814010779ab549cc0e4f30:-873921730,85cd7752fe814010752a9c284b231eef:340659539,ed2df752268140102dd6b08e298753b4:1096106284,56cd2f52ce414010a601a4a9dfef7181:-1582589667,6f5da792a5414010d26c3460778a473a:-1054450897,545da792f0414010f54698eca30e8b46:-436183871,804dab529f414010a755728873eeaa3e:199952536,42fca3928d414010aa431cb9f8fab020:1234661048,5cbcef1275414010417bc22dd3a6a5f9:-1913402092,b89cef128b41401018f820366d62764e:1266645428,f77c2b52f24140106ca49f36d186203b:1909186633,e36ceb12474140104fd50583ab3873f1:-942219079,3b4c2b12344140107305ff40971e5427:-3214992,abeb6352b0414010597209f36bdd595d:1149189487,dedbef12cc4140101c5b29968613b159:1379079313,61cbab1279414010d9c46a4f77550435:-2013508316,73bbef12f141401026f89fb078831344:-1456380497,b9bb6b122b41401074f151f7bdd04e8f:290290438,c29b6b128941401016b80b606e93a475:900065110,5a8bab12ca414010ec38013596e9b539:-932011291,766bafde8a01401079e29bd220d06817:-1759433798,116be712d7414010a9f19efadbea585d:326163277,ea4b271225414010325f1ea811c8dafd:525456546,92fa2bde76014010c09ffc98451eaf9d:1253067085,d4ea6312c2414010af6d85f5ab46b86d:-60655977,e02aa3dec1014010749ed8020b6c830e:1225979791,4bb9ef9e36014010936fbd2d052a8471:-1884743253,3b992b5ee20140102d9a1ed4a324a49f:266248841,fe18631e07014010cc728b53e4222216:-1049319346,1918e75e6001401001aadfbb5daccff1:471947939,e108af1e6f0140106f07bf7aad24b602:1866776465,89c7635e09014010fdb8bc8c22fe0f25:1397673875,28b7a35e77014010824c66fabb7ced31:1866776465,f3976b9a5901401031acc72a360ad97a:1805846234,a9d6efda890140100edff2ab5c6081cd:669970831</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="TestOptions">25078476db010010dbe4e4da4b961994</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 17:35:13</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>9ccbb3a9d15349248e0fb2db85d84f84</sys_id>
+        <sys_metadata>25d6efdadb014010dbe4e4da4b9619cb</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TestOptions</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_scope_delete display_value="">64daa03572704d49a928bf08a985d6f9</sys_scope_delete>
+        <sys_update_name>sp_widget_25d6efdadb014010dbe4e4da4b9619cb</sys_update_name>
+        <sys_update_version display_value="sp_widget_25d6efdadb014010dbe4e4da4b9619cb">e42ad8aadbc14010dbe4e4da4b961918</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 17:35:13</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Note" max_length="40" name="x_snc_createnotes_note" type="collection">
+        <element dependent="table_name" dependent_on_field="table_name" label="Field Name" max_length="80" name="field_name" type="field_name" use_dependent_field="true"/>
         <element default="Enter notes here" label="Note" max_length="4000" name="note" type="string"/>
         <element default="javascript:getNextObjNumberPadded();" display="true" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="number" type="string" use_dynamic_default="true"/>
+        <element label="Table Name" max_length="80" name="table_name" type="table_name"/>
         <element default="New Note" label="Title" max_length="100" name="title" type="string"/>
         <element default="javascript:gs.getUserID();" dynamic_default_value="2fd8e97bef3221002841f7f775c0fbc1" label="User" max_length="32" name="user" reference="sys_user" type="reference" use_dynamic_default="true"/>
         <index name="index">

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Presentation" section_id="beb62076db810010dbe4e4da4b961948" sys_domain="global" table="x_snc_createnotes_optionschematest" version="3" view="sp_instance_config">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>title</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>feb62076db810010dbe4e4da4b961949</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>short_description</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>76b62076db810010dbe4e4da4b96194a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>class_name</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>fab62076db810010dbe4e4da4b96194a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>color</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>72b62076db810010dbe4e4da4b96194b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>size</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>f6b62076db810010dbe4e4da4b96194b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>glyph</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>7eb62076db810010dbe4e4da4b96194b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>css</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>f2b62076db810010dbe4e4da4b96194c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>widget_parameters</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_id>7ab62076db810010dbe4e4da4b96194c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Presentation" display_value="Presentation" name="x_snc_createnotes_optionschematest" sys_domain="global" view="0ce54027b33232007a6de81816a8dca1">beb62076db810010dbe4e4da4b961948</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Presentation</caption>
+            <header>false</header>
+            <name>x_snc_createnotes_optionschematest</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-11-14 19:53:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>beb62076db810010dbe4e4da4b961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Presentation</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+            <sys_update_name>sys_ui_section_beb62076db810010dbe4e4da4b961948</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-11-14 19:53:45</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="SP Instance Config" name="sp_instance_config">0ce54027b33232007a6de81816a8dca1</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

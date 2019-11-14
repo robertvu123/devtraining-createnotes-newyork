@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_snc_createnotes_optionschematest">
+    <x_snc_createnotes_optionschematest action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <custom/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">b89d083edb010010dbe4e4da4b96195f</sp_column>
+        <sp_widget display_value="OptionSchemaTest">137adc6adbc14010dbe4e4da4b961949</sp_widget>
+        <sys_class_name>x_snc_createnotes_optionschematest</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 19:58:42</sys_created_on>
+        <sys_id>9bd724b6db810010dbe4e4da4b961967</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>x_snc_createnotes_optionschematest_9bd724b6db810010dbe4e4da4b961967</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 19:58:42</sys_updated_on>
+        <table/>
+        <title/>
+        <url/>
+        <widget_parameters/>
+    </x_snc_createnotes_optionschematest>
+    <sys_translated_text action="delete_multiple" query="documentkey=9bd724b6db810010dbe4e4da4b961967"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</application>
+        <file_path/>
+        <instance_id>b22c217adb2437004d2bac44d4961929</instance_id>
+        <instance_name>dev78935</instance_name>
+        <name>x_snc_createnotes_optionschematest_9bd724b6db810010dbe4e4da4b961967</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_snc_createnotes_optionschematest"><x_snc_createnotes_optionschematest action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>default</color><css/><custom/><glyph/><id/><order>1</order><roles/><short_description/><size>md</size><sp_column display_value="1">b89d083edb010010dbe4e4da4b96195f</sp_column><sp_widget display_value="OptionSchemaTest">137adc6adbc14010dbe4e4da4b961949</sp_widget><sys_class_name>x_snc_createnotes_optionschematest</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2019-11-14 19:58:42</sys_created_on><sys_id>9bd724b6db810010dbe4e4da4b961967</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package><sys_policy/><sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope><sys_update_name>x_snc_createnotes_optionschematest_9bd724b6db810010dbe4e4da4b961967</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2019-11-14 19:58:42</sys_updated_on><table/><title/><url/><widget_parameters/></x_snc_createnotes_optionschematest><sys_translated_text action="delete_multiple" query="documentkey=9bd724b6db810010dbe4e4da4b961967"/></record_update>]]></payload>
+        <payload_hash>-1583620894</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>4f0b575edbcd0010dbe4e4da4b9619ae</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 19:58:42</sys_created_on>
+        <sys_id>d7d724b6db810010dbe4e4da4b961969</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e6b7f1bc30000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 19:58:42</sys_updated_on>
+        <type>OptionSchemaTest</type>
+        <update_guid>13d724b66d810010a154aae4970ff269</update_guid>
+        <update_guid_history>13d724b66d810010a154aae4970ff269:-1583620894</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">5e4b687adb810010dbe4e4da4b9619da</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-14 20:13:38</sys_created_on>
+        <sys_db_object display_value="" name="x_snc_createnotes_optionschematest">x_snc_createnotes_optionschematest</sys_db_object>
+        <sys_id>00286afabfb24c4480008295be955551</sys_id>
+        <sys_metadata>9bd724b6db810010dbe4e4da4b961967</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_scope_delete display_value="">64daa03572704d49a928bf08a985d6f9</sys_scope_delete>
+        <sys_update_name>x_snc_createnotes_optionschematest_9bd724b6db810010dbe4e4da4b961967</sys_update_name>
+        <sys_update_version display_value="x_snc_createnotes_optionschematest_9bd724b6db810010dbe4e4da4b961967">d7d724b6db810010dbe4e4da4b961969</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-14 20:13:38</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
